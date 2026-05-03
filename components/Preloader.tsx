@@ -14,7 +14,7 @@ export default function Preloader() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (prefersReducedMotion) {
-      const timeout = window.setTimeout(() => setVisible(false), 180);
+      const timeout = window.setTimeout(() => setVisible(false), 450);
       return () => window.clearTimeout(timeout);
     }
 
@@ -24,20 +24,20 @@ export default function Preloader() {
 
       gsap.to(counter, {
         value: 100,
-        duration: 1.15,
+        duration: 2.35,
         ease: 'power3.inOut',
         onUpdate: () => setProgress(Math.round(counter.value)),
       });
 
       const tl = gsap.timeline({
-        delay: 1.05,
+        delay: 2.2,
         onComplete: () => setVisible(false),
       });
 
       tl.to('.preloader-digit', {
         yPercent: -120,
         stagger: 0.04,
-        duration: 0.36,
+        duration: 0.55,
         ease: 'power4.inOut',
       })
         .to(
@@ -45,7 +45,7 @@ export default function Preloader() {
           {
             rotate: 90,
             y: -46,
-            duration: 0.3,
+            duration: 0.45,
             ease: 'power3.inOut',
           },
           '<'
@@ -55,7 +55,7 @@ export default function Preloader() {
           {
             x: -76,
             y: 68,
-            duration: 0.3,
+            duration: 0.45,
             ease: 'power3.inOut',
           },
           '<'
@@ -63,7 +63,7 @@ export default function Preloader() {
         .to('.preloader-loader', {
           scale: 1.08,
           rotate: 45,
-          duration: 0.3,
+          duration: 0.45,
           ease: 'power3.inOut',
         })
         .to(
@@ -71,7 +71,7 @@ export default function Preloader() {
           {
             opacity: 0,
             scale: 0.96,
-            duration: 0.24,
+            duration: 0.35,
             ease: 'power2.out',
           },
           '<'
@@ -81,7 +81,7 @@ export default function Preloader() {
           {
             scale: 1,
             rotate: 0,
-            duration: 0.52,
+            duration: 0.9,
             ease: 'power4.inOut',
           },
           '-=0.1'
@@ -90,7 +90,7 @@ export default function Preloader() {
           root,
           {
             clipPath: 'inset(0 0 100% 0)',
-            duration: 0.46,
+            duration: 0.75,
             ease: 'power4.inOut',
           },
           '-=0.2'
@@ -132,7 +132,7 @@ export default function Preloader() {
         <div className="preloader-center absolute inset-0 z-10 flex items-center justify-center px-5 text-center">
           <div className="flex w-full max-w-4xl flex-col items-center gap-7">
             <div>
-              <p className="mb-5 text-sm font-mono uppercase text-[#d8b35f]">Preparando criterio</p>
+              <p className="mb-5 text-sm font-mono uppercase text-[#d8b35f]">Preparando diagnóstico</p>
               <h2 className="font-heading text-5xl font-black uppercase leading-none sm:text-6xl md:text-8xl">
                 Código con
                 <span className="block text-[#d8b35f]">criterio.</span>

@@ -15,7 +15,7 @@ type CaseCardProps = {
 function CaseCard({ item, index }: CaseCardProps) {
   return (
     <article
-      className="case-card relative flex min-h-[520px] flex-col justify-between overflow-hidden border border-white/15 bg-[#0b0b0b] p-6"
+      className="case-card relative flex min-h-[520px] w-[82vw] max-w-[560px] flex-shrink-0 flex-col justify-between overflow-hidden border border-white/15 bg-[#0b0b0b] p-6 sm:w-[68vw] md:w-[44vw] lg:w-[36vw]"
       style={{ '--case-accent': item.accent } as CSSProperties}
     >
       <div className="case-card-bg absolute inset-0" />
@@ -63,30 +63,74 @@ function CaseCard({ item, index }: CaseCardProps) {
 
 export default function WorkGallery() {
   const sectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
-    if (!section) return;
+    const track = trackRef.current;
+    if (!section || !track) return;
 
     const ctx = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>('.case-card').forEach((card, index) => {
+      const mm = gsap.matchMedia();
+
+      mm.add('(min-width: 768px)', () => {
+        const getScrollDistance = () => Math.max(0, track.scrollWidth - window.innerWidth + 96);
+
         gsap.fromTo(
-          card,
-          { y: 48, opacity: 0, scale: 0.98 },
+          '.case-card',
+          { y: 36, opacity: 0.72, scale: 0.985 },
           {
             y: 0,
             opacity: 1,
             scale: 1,
-            delay: index * 0.04,
-            duration: 0.78,
+            stagger: 0.06,
+            duration: 0.8,
             ease: 'power3.out',
             scrollTrigger: {
-              trigger: card,
-              start: 'top 88%',
+              trigger: section,
+              start: 'top 76%',
+              toggleActions: 'play none none reverse',
             },
           }
         );
+
+        gsap.to(track, {
+          x: () => -getScrollDistance(),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: () => `+=${getScrollDistance()}`,
+            scrub: 1.35,
+            pin: true,
+            pinSpacing: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
       });
+
+      mm.add('(max-width: 767px)', () => {
+        gsap.utils.toArray<HTMLElement>('.case-card').forEach((card) => {
+          gsap.fromTo(
+            card,
+            { y: 52, opacity: 0.55, scale: 0.97 },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.75,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: card,
+                start: 'top 88%',
+              },
+            }
+          );
+        });
+      });
+
+      return () => mm.revert();
     }, section);
 
     return () => ctx.revert();
@@ -96,21 +140,23 @@ export default function WorkGallery() {
     <section
       ref={sectionRef}
       id="cases"
-      className="section-padding relative overflow-hidden bg-[#050505] text-white"
+      className="relative overflow-hidden bg-[#050505] py-20 text-white md:min-h-screen md:py-0"
     >
-      <div className="container">
-        <div className="mb-12 grid gap-6 md:mb-16 md:grid-cols-[1fr_0.42fr] md:items-end">
-          <h2 className="font-heading text-6xl font-black uppercase leading-none md:text-7xl 2xl:text-8xl">
+      <div className="container mb-12 md:absolute md:left-1/2 md:top-32 md:z-20 md:-translate-x-1/2">
+        <div className="grid gap-6 md:grid-cols-[1fr_0.42fr] md:items-end">
+          <h2 className="font-heading text-6xl font-black uppercase leading-none md:text-8xl">
             Soluciones
-            <span className="block stroke-text">base</span>
+            <span className="block stroke-text">en demo</span>
           </h2>
-          <p className="max-w-lg text-lg leading-relaxed text-white/56">
-            Puntos de partida visuales y funcionales para adaptar a tu sector, tus clientes y tu
-            forma real de trabajar.
-          </p>
+          <div className="hidden min-h-36 md:block" aria-hidden="true" />
         </div>
+      </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <div className="md:flex md:h-screen md:items-end md:pb-16">
+        <div
+          ref={trackRef}
+          className="case-track flex w-max gap-6 overflow-x-auto px-4 pb-4 sm:px-6 md:overflow-visible md:pl-[42vw] md:pr-[18vw]"
+        >
           {siteContent.cases.map((item, index) => (
             <CaseCard key={item.id} item={item} index={index} />
           ))}

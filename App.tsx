@@ -86,10 +86,10 @@ export default function App() {
         <Intro />
         <Services />
         <WorkGallery />
-        <Trust />
         <Process />
         <Manifesto />
         <Team />
+        <Trust />
         <Marquee />
       </main>
       <Footer />

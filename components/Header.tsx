@@ -44,7 +44,7 @@ export default function Header() {
     <>
       <header
         ref={headerRef}
-        className="fixed left-0 top-0 z-50 flex w-full items-center justify-between border-b border-white/10 bg-[#050505]/88 px-4 py-4 text-[#f4f0e5] sm:px-6 md:px-8"
+        className="fixed left-0 top-0 z-50 flex w-full items-center justify-between px-4 py-4 text-[#f4f0e5] sm:px-6 md:px-8"
       >
         <a
           ref={logoRef}
@@ -57,11 +57,11 @@ export default function Header() {
             alt=""
             className="h-9 w-9 border border-white/30 object-cover"
           />
-          <span className="hidden sm:inline">{siteContent.brand.name}</span>
-          <span className="sm:hidden">{siteContent.brand.shortName}</span>
+          <span className="hidden mix-blend-difference sm:inline">{siteContent.brand.name}</span>
+          <span className="mix-blend-difference sm:hidden">{siteContent.brand.shortName}</span>
         </a>
 
-        <nav className="hidden md:block" aria-label="Navegación principal">
+        <nav className="hidden mix-blend-difference md:block" aria-label="Navegación principal">
           <ul ref={linksRef} className="flex items-center gap-7 text-sm font-medium uppercase">
             {navItems.map((item) => (
               <li key={item.href} className="group overflow-hidden">
@@ -88,7 +88,7 @@ export default function Header() {
 
         <button
           onClick={() => setMobileMenuOpen((open) => !open)}
-          className="relative z-50 flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
+          className="relative z-50 flex h-11 w-11 flex-col items-center justify-center gap-1.5 mix-blend-difference md:hidden"
           aria-label="Abrir o cerrar menú"
           aria-expanded={mobileMenuOpen}
           type="button"

@@ -68,14 +68,14 @@ export default function Footer() {
           <div>
             <p className="mb-5 inline-flex items-center gap-2 border border-[#d8b35f]/45 px-4 py-2 text-xs uppercase text-[#d8b35f]">
               <Mail className="h-4 w-4" />
-              Diagnóstico inicial
+              Diagnostico inicial
             </p>
             <h2 className="font-serif-italic text-5xl leading-none md:text-7xl">
               Cuéntanos qué quieres mejorar.
             </h2>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/58">
-              Revisamos tu negocio, tu captación y tus procesos para detectar dónde una web, una app
-              o una automatización puede aportar valor real sin inflar el proyecto.
+              Revisamos tu negocio, tu captacion y tus procesos para detectar donde una web, una app
+              o una automatizacion puede aportar valor real.
             </p>
             <div className="mt-8 flex flex-col gap-3 text-white/58">
               <a href={siteContent.brand.whatsapp} className="inline-flex items-center gap-2 text-[#d8b35f] hover:text-white">
@@ -99,8 +99,6 @@ export default function Footer() {
                   onChange={(event) => updateField('name', event.target.value)}
                   className="border border-white/12 bg-[#050505]/70 px-4 py-3 text-base text-white outline-none transition-colors focus:border-[#d8b35f]"
                   type="text"
-                  autoComplete="name"
-                  placeholder="Tu nombre"
                 />
               </label>
               <label className="grid gap-2 text-xs uppercase text-white/50">
@@ -112,8 +110,6 @@ export default function Footer() {
                   onChange={(event) => updateField('business', event.target.value)}
                   className="border border-white/12 bg-[#050505]/70 px-4 py-3 text-base text-white outline-none transition-colors focus:border-[#d8b35f]"
                   type="text"
-                  autoComplete="organization"
-                  placeholder="Nombre del negocio"
                 />
               </label>
             </div>
@@ -126,12 +122,10 @@ export default function Footer() {
                 onChange={(event) => updateField('contact', event.target.value)}
                 className="border border-white/12 bg-[#050505]/70 px-4 py-3 text-base text-white outline-none transition-colors focus:border-[#d8b35f]"
                 type="text"
-                autoComplete="email"
-                placeholder="Email o WhatsApp"
               />
             </label>
             <label className="grid gap-2 text-xs uppercase text-white/50">
-              Qué necesitas
+              Que necesitas
               <select
                 name="need"
                 required
@@ -142,7 +136,7 @@ export default function Footer() {
                 <option value="">Selecciona una opcion</option>
                 <option>Web o tienda online</option>
                 <option>App o CRM</option>
-                <option>IA o automatización de citas</option>
+                <option>IA o automatizacion de citas</option>
                 <option>SEO local y marketing</option>
                 <option>Sistema interno a medida</option>
               </select>
@@ -155,20 +149,17 @@ export default function Footer() {
                 value={form.message}
                 onChange={(event) => updateField('message', event.target.value)}
                 className="min-h-32 resize-y border border-white/12 bg-[#050505]/70 px-4 py-3 text-base text-white outline-none transition-colors focus:border-[#d8b35f]"
-                placeholder="Cuéntanos qué quieres mejorar, qué te preocupa o qué necesitas lanzar."
               />
             </label>
             <button
-              type="submit"
+              type="button"
+              onClick={(event) => event.currentTarget.form?.requestSubmit()}
               disabled={formStatus === 'sending'}
               className="inline-flex items-center justify-center gap-2 bg-[#d8b35f] px-6 py-4 text-sm font-bold uppercase text-[#050505] transition-transform duration-300 hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
             >
-              {formStatus === 'sending' ? 'Enviando...' : 'Enviar diagnóstico'}
+              {formStatus === 'sending' ? 'Enviando...' : siteContent.brand.primaryCta}
               <ArrowUpRight className="h-4 w-4" />
             </button>
-            <p className="text-sm leading-relaxed text-white/40">
-              Normalmente respondemos con una primera lectura y siguiente paso recomendado.
-            </p>
             {formFeedback ? (
               <p
                 className={`text-sm leading-relaxed ${

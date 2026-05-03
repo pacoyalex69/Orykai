@@ -223,7 +223,6 @@ ul {
 
 .service-reveal {
   transform-origin: center;
-  will-change: transform, opacity;
 }
 
 .service-reveal-grid,
@@ -231,46 +230,10 @@ ul {
 .case-card-bg {
   background-image:
     linear-gradient(135deg, color-mix(in srgb, var(--service-accent, var(--gold)) 22%, transparent), transparent 54%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 56%),
     radial-gradient(circle at 74% 18%, rgba(244, 240, 229, 0.045), transparent 34%);
   background-size:
     100% 100%,
-    100% 100%,
     100% 100%;
-}
-
-.service-row {
-  position: relative;
-}
-
-.service-row::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 22px;
-  bottom: 22px;
-  width: 2px;
-  background: color-mix(in srgb, var(--service-accent, var(--gold)) 72%, transparent);
-  opacity: 0;
-  transform: scaleY(0.72);
-  transform-origin: center;
-  transition:
-    opacity 280ms ease,
-    transform 280ms ease;
-}
-
-.service-row:hover::before,
-.service-row:focus-visible::before {
-  opacity: 1;
-  transform: scaleY(1);
-}
-
-.service-reveal::after {
-  content: '';
-  position: absolute;
-  inset: 14px;
-  border: 1px solid color-mix(in srgb, var(--service-accent, var(--gold)) 14%, transparent);
-  pointer-events: none;
 }
 
 .case-card-bg {
@@ -350,9 +313,6 @@ ul {
     scroll-snap-align: center;
   }
 
-  .service-row::before {
-    display: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
