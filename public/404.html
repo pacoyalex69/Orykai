@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>404 | Orykai Software</title>
+    <link rel="icon" href="/image/orykai-logo.jpeg" />
+    <link rel="preload" as="image" href="/image/banner.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #050505;
+        --paper: #f4f0e5;
+        --gold: #d8b35f;
+        --gold-strong: #f3cc6e;
+        --water: #2fb7b2;
+        --panel: rgba(5, 5, 5, 0.58);
+        --line: rgba(244, 240, 229, 0.16);
+        --mx: 50%;
+        --my: 50%;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        letter-spacing: 0;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+        overflow-x: hidden;
+        background: var(--bg);
+      }
+
+      body {
+        color: var(--paper);
+        font-family: "Manrope", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .not-found {
+        position: relative;
+        isolation: isolate;
+        min-height: 100dvh;
+        overflow: hidden;
+        background: var(--bg);
+      }
+
+      .not-found::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -5;
+        background-image: url("/image/banner.png");
+        background-position: 58% 48%;
+        background-size: cover;
+        filter: brightness(0.52) contrast(1.08) saturate(0.94);
+        transform: scale(1.04);
+      }
+
+      .not-found::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -4;
+        background:
+          linear-gradient(90deg, rgba(5, 5, 5, 0.88), rgba(5, 5, 5, 0.52) 44%, rgba(5, 5, 5, 0.86)),
+          linear-gradient(180deg, rgba(5, 5, 5, 0.42), rgba(5, 5, 5, 0.92)),
+          linear-gradient(118deg, transparent 0%, transparent 54%, rgba(216, 179, 95, 0.16) 82%, rgba(47, 183, 178, 0.1) 100%);
+      }
+
+      .grain {
+        position: absolute;
+        inset: 0;
+        z-index: -3;
+        opacity: 0.22;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(244, 240, 229, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(244, 240, 229, 0.03) 1px, transparent 1px);
+        background-size: 72px 72px;
+        mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+      }
+
+      .light-field {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        pointer-events: none;
+        background:
+          linear-gradient(135deg, rgba(216, 179, 95, 0.14), transparent 34%),
+          linear-gradient(215deg, rgba(47, 183, 178, 0.11), transparent 42%),
+          radial-gradient(circle at var(--mx) var(--my), rgba(244, 240, 229, 0.08), transparent 28%);
+        transition: background-position 0.2s ease;
+      }
+
+      .scanline {
+        position: absolute;
+        left: -16%;
+        right: -16%;
+        top: 22%;
+        z-index: -1;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--gold), rgba(244, 240, 229, 0.5), transparent);
+        opacity: 0.62;
+        transform: rotate(-8deg);
+        animation: scan 6.2s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+      }
+
+      .shell {
+        display: flex;
+        min-height: 100dvh;
+        flex-direction: column;
+        padding: 20px 16px 18px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        opacity: 0;
+        transform: translateY(-18px);
+        animation: reveal-top 0.9s cubic-bezier(0.19, 1, 0.22, 1) 0.08s forwards;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-family: "Syne", sans-serif;
+        font-size: 1rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .brand img {
+        width: 38px;
+        height: 38px;
+        border: 1px solid rgba(216, 179, 95, 0.55);
+        object-fit: cover;
+      }
+
+      .signal {
+        display: none;
+        align-items: center;
+        gap: 10px;
+        color: rgba(244, 240, 229, 0.58);
+        font-family: "Manrope", sans-serif;
+        font-size: 0.76rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .signal::before {
+        content: "";
+        width: 42px;
+        height: 1px;
+        background: var(--gold);
+      }
+
+      .content {
+        display: grid;
+        flex: 1;
+        align-items: end;
+        gap: 34px;
+        padding: 76px 0 28px;
+      }
+
+      .code-wrap {
+        position: relative;
+        min-width: 0;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid rgba(216, 179, 95, 0.42);
+        background: rgba(5, 5, 5, 0.2);
+        padding: 9px 12px;
+        color: var(--gold);
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        opacity: 0;
+        transform: translateY(24px);
+        animation: reveal-up 0.85s cubic-bezier(0.19, 1, 0.22, 1) 0.2s forwards;
+        backdrop-filter: blur(4px);
+      }
+
+      .eyebrow span {
+        width: 8px;
+        height: 8px;
+        background: var(--water);
+      }
+
+      .code {
+        position: relative;
+        margin-top: 20px;
+        font-family: "Syne", sans-serif;
+        font-size: 8rem;
+        font-weight: 800;
+        line-height: 0.78;
+        text-transform: uppercase;
+        color: rgba(244, 240, 229, 0.94);
+        text-shadow: 0 28px 86px rgba(0, 0, 0, 0.88);
+        opacity: 0;
+        transform: translateY(42px) scale(0.98);
+        animation: code-in 1.05s cubic-bezier(0.19, 1, 0.22, 1) 0.28s forwards;
+      }
+
+      .code::after {
+        content: "404";
+        position: absolute;
+        left: 5px;
+        top: 6px;
+        z-index: -1;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(216, 179, 95, 0.64);
+        opacity: 0.72;
+      }
+
+      .message {
+        max-width: 690px;
+        opacity: 0;
+        transform: translateY(28px);
+        animation: reveal-up 0.95s cubic-bezier(0.19, 1, 0.22, 1) 0.45s forwards;
+      }
+
+      h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 2.65rem;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 0.98;
+      }
+
+      .message p {
+        margin-top: 18px;
+        max-width: 570px;
+        color: rgba(244, 240, 229, 0.66);
+        font-size: 1.05rem;
+        line-height: 1.65;
+      }
+
+      .actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 28px;
+        opacity: 0;
+        transform: translateY(28px);
+        animation: reveal-up 0.95s cubic-bezier(0.19, 1, 0.22, 1) 0.62s forwards;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 54px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        border: 1px solid rgba(244, 240, 229, 0.24);
+        padding: 15px 18px;
+        font-size: 0.86rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        transition:
+          transform 0.32s cubic-bezier(0.19, 1, 0.22, 1),
+          border-color 0.32s ease,
+          color 0.32s ease,
+          background-color 0.32s ease;
+      }
+
+      .button.primary {
+        border-color: var(--gold);
+        background: var(--gold);
+        color: var(--bg);
+      }
+
+      .button.secondary {
+        background: rgba(5, 5, 5, 0.22);
+        color: var(--paper);
+        backdrop-filter: blur(4px);
+      }
+
+      .button:hover {
+        transform: translateY(-4px);
+      }
+
+      .button.secondary:hover {
+        border-color: var(--water);
+        color: var(--water);
+      }
+
+      .route-panel {
+        border-top: 1px solid var(--line);
+        padding-top: 20px;
+        opacity: 0;
+        transform: translateY(28px);
+        animation: reveal-up 0.95s cubic-bezier(0.19, 1, 0.22, 1) 0.74s forwards;
+      }
+
+      .route-panel p {
+        color: rgba(244, 240, 229, 0.42);
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .route-links {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .route-links a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(244, 240, 229, 0.12);
+        padding: 13px 0;
+        color: rgba(244, 240, 229, 0.74);
+        font-size: 0.96rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: color 0.28s ease, border-color 0.28s ease;
+      }
+
+      .route-links a:hover {
+        border-color: rgba(216, 179, 95, 0.6);
+        color: var(--gold);
+      }
+
+      .corner-mark {
+        position: absolute;
+        right: 16px;
+        bottom: 18px;
+        display: none;
+        color: rgba(244, 240, 229, 0.28);
+        font-family: "Syne", sans-serif;
+        font-size: 5rem;
+        font-weight: 800;
+        line-height: 0.8;
+        text-transform: uppercase;
+      }
+
+      @keyframes reveal-top {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes reveal-up {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes code-in {
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes scan {
+        0%,
+        18% {
+          transform: translateY(-80px) rotate(-8deg);
+          opacity: 0;
+        }
+
+        34%,
+        72% {
+          opacity: 0.62;
+        }
+
+        100% {
+          transform: translateY(360px) rotate(-8deg);
+          opacity: 0;
+        }
+      }
+
+      @media (min-width: 640px) {
+        .shell {
+          padding: 28px 32px 26px;
+        }
+
+        .signal {
+          display: inline-flex;
+        }
+
+        .code {
+          font-size: 12rem;
+        }
+
+        h1 {
+          font-size: 4rem;
+        }
+
+        .actions {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+
+        .button {
+          min-width: 205px;
+        }
+
+        .route-links {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          column-gap: 26px;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .shell {
+          padding: 34px 48px 32px;
+        }
+
+        .content {
+          grid-template-columns: minmax(0, 1fr) minmax(320px, 0.42fr);
+          align-items: end;
+          gap: 54px;
+          padding: 96px 0 34px;
+        }
+
+        .code {
+          font-size: 18rem;
+        }
+
+        h1 {
+          font-size: 5rem;
+        }
+
+        .message p {
+          font-size: 1.12rem;
+        }
+
+        .route-panel {
+          align-self: end;
+          border-top: 0;
+          border-left: 1px solid var(--line);
+          padding-top: 0;
+          padding-left: 28px;
+        }
+
+        .route-links {
+          grid-template-columns: 1fr;
+        }
+
+        .corner-mark {
+          display: block;
+        }
+      }
+
+      @media (min-width: 1440px) {
+        .code {
+          font-size: 22rem;
+        }
+      }
+
+      @media (max-width: 380px) {
+        .code {
+          font-size: 7rem;
+        }
+
+        h1 {
+          font-size: 2.25rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="not-found">
+      <div class="grain" aria-hidden="true"></div>
+      <div class="light-field" aria-hidden="true"></div>
+      <div class="scanline" aria-hidden="true"></div>
+      <div class="shell">
+        <header class="topbar">
+          <a class="brand" href="/" aria-label="Volver al inicio de Orykai Software">
+            <img src="/image/orykai-logo.jpeg" alt="" />
+            <span>Orykai Software</span>
+          </a>
+          <div class="signal" aria-hidden="true">Ruta fuera de mapa</div>
+        </header>
+
+        <section class="content" aria-labelledby="not-found-title">
+          <div class="code-wrap">
+            <div class="eyebrow"><span aria-hidden="true"></span> Error 404</div>
+            <div class="code" aria-hidden="true">404</div>
+            <div class="message">
+              <h1 id="not-found-title">Esta ruta no está en producción.</h1>
+              <p>
+                La página que buscas no existe o ha cambiado de dirección. Vuelve al inicio o
+                cuéntanos qué necesitas mejorar y te llevamos al punto correcto.
+              </p>
+              <nav class="actions" aria-label="Acciones principales">
+                <a class="button primary" href="/">Volver al inicio <span aria-hidden="true">↗</span></a>
+                <a class="button secondary" href="/#diagnostico">
+                  Solicitar diagnóstico <span aria-hidden="true">↗</span>
+                </a>
+              </nav>
+            </div>
+          </div>
+
+          <aside class="route-panel" aria-label="Enlaces útiles">
+            <p>Recalcular ruta</p>
+            <nav class="route-links">
+              <a href="/#services">Servicios <span aria-hidden="true">01</span></a>
+              <a href="/#cases">Demos <span aria-hidden="true">02</span></a>
+              <a href="mailto:alex2005sg@gmail.com">Email <span aria-hidden="true">03</span></a>
+              <a href="https://wa.me/34633070720">WhatsApp <span aria-hidden="true">04</span></a>
+            </nav>
+          </aside>
+        </section>
+      </div>
+      <div class="corner-mark" aria-hidden="true">改</div>
+    </main>
+    <script>
+      (() => {
+        const root = document.querySelector(".not-found");
+        if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        let frame = 0;
+        window.addEventListener(
+          "pointermove",
+          (event) => {
+            window.cancelAnimationFrame(frame);
+            frame = window.requestAnimationFrame(() => {
+              root.style.setProperty("--mx", `${(event.clientX / window.innerWidth) * 100}%`);
+              root.style.setProperty("--my", `${(event.clientY / window.innerHeight) * 100}%`);
+            });
+          },
+          { passive: true }
+        );
+      })();
+    </script>
+  </body>
+</html>
