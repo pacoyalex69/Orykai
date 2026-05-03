@@ -1,0 +1,367 @@
+:root {
+  --bg-color: #050505;
+  --panel-color: #0b0b0b;
+  --text-color: #f4f0e5;
+  --muted-color: rgba(244, 240, 229, 0.62);
+  --gold: #d8b35f;
+  --gold-strong: #f3cc6e;
+  --water: #2fb7b2;
+  --paper: #e8e2d3;
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0 !important;
+}
+
+/* Custom cursor disabled for now. Re-enable together with <CustomCursor /> in App.tsx.
+@media (pointer: fine) {
+  html body * {
+    cursor: none !important;
+  }
+}
+*/
+
+html {
+  width: 100%;
+  overflow-x: hidden;
+  background: var(--bg-color);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--bg-color);
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  color: inherit;
+  font: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  max-width: 1800px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 4vw;
+}
+
+.section-padding {
+  padding: 12vh 0;
+}
+
+.stroke-text {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244, 240, 229, 0.34);
+}
+
+.stroke-text-dark {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(5, 5, 5, 0.72);
+}
+
+.font-serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  background-color: #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  mix-blend-mode: exclusion;
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+    height 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.custom-cursor.hovered {
+  width: 72px;
+  height: 72px;
+}
+
+.orykai-preloader {
+  width: 100vw;
+  min-height: 100dvh;
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+}
+
+.preloader-loader {
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.preloader-expander {
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.preloader-surface,
+.orykai-hero-field,
+.manifesto-grid,
+.footer-grid {
+  background-image:
+    linear-gradient(135deg, rgba(216, 179, 95, 0.18), transparent 34%),
+    linear-gradient(215deg, rgba(47, 183, 178, 0.12), transparent 42%),
+    radial-gradient(circle at 18% 18%, rgba(244, 240, 229, 0.055), transparent 36%);
+  background-size:
+    100% 100%,
+    100% 100%,
+    100% 100%;
+}
+
+.orykai-hero-field::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5, 5, 5, 0.1), rgba(5, 5, 5, 0.92));
+}
+
+.orykai-waterline {
+  background-image:
+    linear-gradient(0deg, rgba(47, 183, 178, 0.2), transparent),
+    radial-gradient(circle at 18% 92%, rgba(47, 183, 178, 0.16), transparent 36%);
+}
+
+.hero-ocean-image {
+  filter: brightness(0.78) contrast(1.06) saturate(1);
+  transform-origin: center;
+  will-change: transform;
+}
+
+.orykai-hero-vignette {
+  background:
+    linear-gradient(90deg, rgba(5, 5, 5, 0.74) 0%, rgba(5, 5, 5, 0.42) 38%, rgba(5, 5, 5, 0.16) 66%, rgba(5, 5, 5, 0.54) 100%),
+    linear-gradient(0deg, rgba(5, 5, 5, 0.86) 0%, rgba(5, 5, 5, 0.44) 30%, rgba(5, 5, 5, 0.08) 68%, rgba(5, 5, 5, 0.3) 100%);
+}
+
+.orykai-hero-goldwash {
+  opacity: 0.54;
+  background:
+    linear-gradient(112deg, transparent 0%, transparent 52%, rgba(216, 179, 95, 0.13) 76%, rgba(243, 204, 110, 0.18) 100%),
+    linear-gradient(180deg, transparent 0%, rgba(5, 5, 5, 0.16) 56%, rgba(216, 179, 95, 0.05) 100%);
+  mix-blend-mode: screen;
+}
+
+.orykai-hero-clinical-grid {
+  display: none;
+}
+
+.hero-title-shadow {
+  text-shadow: 0 24px 70px rgba(0, 0, 0, 0.82);
+}
+
+.service-reveal {
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.service-reveal-grid,
+.team-portrait-grid,
+.case-card-bg {
+  background-image:
+    linear-gradient(135deg, color-mix(in srgb, var(--service-accent, var(--gold)) 22%, transparent), transparent 54%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 56%),
+    radial-gradient(circle at 74% 18%, rgba(244, 240, 229, 0.045), transparent 34%);
+  background-size:
+    100% 100%,
+    100% 100%,
+    100% 100%;
+}
+
+.service-row {
+  position: relative;
+}
+
+.service-row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 22px;
+  bottom: 22px;
+  width: 2px;
+  background: color-mix(in srgb, var(--service-accent, var(--gold)) 72%, transparent);
+  opacity: 0;
+  transform: scaleY(0.72);
+  transform-origin: center;
+  transition:
+    opacity 280ms ease,
+    transform 280ms ease;
+}
+
+.service-row:hover::before,
+.service-row:focus-visible::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.service-reveal::after {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 1px solid color-mix(in srgb, var(--service-accent, var(--gold)) 14%, transparent);
+  pointer-events: none;
+}
+
+.case-card-bg {
+  background-image:
+    linear-gradient(145deg, color-mix(in srgb, var(--case-accent) 20%, transparent), transparent 56%),
+    radial-gradient(circle at 72% 16%, rgba(255, 255, 255, 0.05), transparent 34%);
+}
+
+.case-visual {
+  position: relative;
+}
+
+.case-visual::before,
+.case-visual::after,
+.case-visual-mark::before,
+.case-visual-mark::after {
+  content: '';
+  position: absolute;
+  border: 1px solid color-mix(in srgb, var(--case-accent) 58%, transparent);
+}
+
+.case-visual::before {
+  inset: 18px;
+}
+
+.case-visual::after {
+  inset: 42px;
+  transform: rotate(45deg);
+}
+
+.case-visual-mark::before {
+  inset: -18px;
+  transform: rotate(12deg);
+}
+
+.case-visual-mark::after {
+  inset: -32px;
+  transform: rotate(-12deg);
+}
+
+.team-portrait-grid {
+  background-image:
+    linear-gradient(135deg, color-mix(in srgb, var(--member-accent) 20%, transparent), transparent 58%),
+    radial-gradient(circle at 70% 16%, rgba(255, 255, 255, 0.05), transparent 34%);
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+@media (max-width: 767px) {
+  .section-padding {
+    padding: 88px 0;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .hero-ocean-image {
+    object-position: 58% 44%;
+  }
+
+  .orykai-hero-vignette {
+    background:
+      linear-gradient(90deg, rgba(5, 5, 5, 0.64), rgba(5, 5, 5, 0.36)),
+      linear-gradient(0deg, rgba(5, 5, 5, 0.88) 0%, rgba(5, 5, 5, 0.48) 42%, rgba(5, 5, 5, 0.14) 100%);
+  }
+
+  .case-track {
+    scroll-snap-type: x mandatory;
+  }
+
+  .case-card {
+    scroll-snap-align: center;
+  }
+
+  .service-row::before {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
